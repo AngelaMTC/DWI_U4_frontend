@@ -1,6 +1,6 @@
-const API_URL = "http://localhost:3000/todos";
+const API_URL = "http://localhost:3000/productos";
 
-export async function getTodos() {
+export async function getProductos() {
   try {
     const response = await fetch(API_URL);
     return response.json();
@@ -9,7 +9,7 @@ export async function getTodos() {
   }
 }
 
-export async function deleteTodo(id) {
+export async function deleteProducto(id) {
   try {
     const response = await fetch(`${API_URL}/delete/${id}`, {
       method: "PATCH",
@@ -20,7 +20,7 @@ export async function deleteTodo(id) {
   }
 }
 
-export async function completeTodo(id) {
+export async function completeProducto(id) {
   try {
     const response = await fetch(`${API_URL}/complete/${id}`, {
       method: "PATCH",
@@ -31,7 +31,7 @@ export async function completeTodo(id) {
   }
 }
 
-export async function hardDeleteTodo(id) {
+export async function hardDeleteProducto(id) {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
@@ -42,14 +42,14 @@ export async function hardDeleteTodo(id) {
   }
 }
 
-export async function createTodo(todo) {
+export async function createProducto(producto) {
   try {
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(todo),
+      body: JSON.stringify(producto),
     });
     return response.json();
   } catch (error) {
@@ -57,14 +57,14 @@ export async function createTodo(todo) {
   }
 }
 
-export async function updateTodo(id, todo) {
+export async function updateProducto(id, producto) {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(todo),
+      body: JSON.stringify(producto),
     });
     return response.json();
   } catch (error) {

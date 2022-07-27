@@ -84,7 +84,7 @@ h1 {
     color: #747bff;
   }
 }
-.todo-list {
+.producto-list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -92,7 +92,7 @@ h1 {
   width: 100%;
   height: 100%;
 }
-.todo-item {
+.producto-item {
   width: 100%;
   height: 100%;
   align-items: flex-start;

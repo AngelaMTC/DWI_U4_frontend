@@ -1,48 +1,48 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import {
-  completeTodo,
-  deleteTodo,
-  getTodos,
-  hardDeleteTodo,
-  createTodo,
-  updateTodo,
-} from "./api/todos";
+  completeProducto,
+  deleteProducto,
+  getProductos,
+  hardDeleteProducto,
+  createProducto,
+  updateProducto,
+} from "./api/productos";
 
 import { TiEdit } from "react-icons/ti";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [productos, setProductos] = useState([]);
 
-  const [newTodo, setNewTodo] = useState({});
+  const [newProducto, setNewProducto] = useState({});
 
-  async function fetchTodos() {
-    const fetchedTodos = await getTodos();
-    console.log({ fetchedTodos });
-    setTodos(fetchedTodos);
+  async function fetchProductos() {
+    const fetchedProductos = await getProductos();
+    console.log({ fetchedProductos });
+    setProductos(fetchedProductos);
   }
 
-  const TodoComponent = ({
+  const ProductoComponent = ({
     _id,
     title,
     description,
     updatedAt,
     completed,
-    removeTodo,
-    hardDeleteTodo,
-    toggleTodo,
-    handleCreateOrUpdateTodo,
+    removeProducto,
+    hardDeleteProducto,
+    toggleProducto,
+    handleCreateOrUpdateProducto,
   }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [edditingTodo, setEditingTodo] = useState({});
+    const [edditingProducto, setEditingProducto] = useState({});
 
     const handleEdit = () => {
       setIsEditing((current) => !current);
-      setEditingTodo({ _id, title, description, completed });
+      setEditingProducto({ _id, title, description, completed });
     };
 
     return (
-      <div className="todo-item">
+      <div className="producto-item">
         <h2>
           {title} <TiEdit onClick={handleEdit} />
         </h2>
@@ -51,17 +51,17 @@ function App() {
           <input
             checked={completed}
             type="checkbox"
-            onChange={() => toggleTodo(_id)}
+            onChange={() => toggleProducto(_id)}
           />
           <b>{completed ? " Completed" : "Not completed"}</b>{" "}
         </p>
         <p>
           Last update:<b>{updatedAt}</b>{" "}
         </p>
-        <button className="button-danger" onClick={() => removeTodo(_id)}>
+        <button className="button-danger" onClick={() => removeProducto(_id)}>
           Delete
         </button>
-        <button className="button-danger" onClick={() => hardDeleteTodo(_id)}>
+        <button className="button-danger" onClick={() => hardDeleteProducto(_id)}>
           Hard Delete
         </button>
 
@@ -71,9 +71,9 @@ function App() {
             <input
               type="text"
               name="title"
-              value={edditingTodo.title}
+              value={edditingProducto.title}
               onChange={(e) =>
-                setEditingTodo((current) => ({
+                setEditingProducto((current) => ({
                   ...current,
                   title: e.target.value,
                 }))
@@ -83,9 +83,9 @@ function App() {
             <input
               type="text"
               name="description"
-              value={edditingTodo.description}
+              value={edditingProducto.description}
               onChange={(e) =>
-                setEditingTodo((current) => ({
+                setEditingProducto((current) => ({
                   ...current,
                   description: e.target.value,
                 }))
@@ -93,9 +93,9 @@ function App() {
             />
             <button
               className="button-primary"
-              onClick={() => handleCreateOrUpdateTodo(edditingTodo)}
+              onClick={() => handleCreateOrUpdateProducto(edditingProducto)}
             >
-              Update Todo
+              Update Producto
             </button>
           </div>
         )}
@@ -105,49 +105,49 @@ function App() {
   };
 
   useEffect(() => {
-    fetchTodos();
+    fetchProductos();
   }, []);
 
-  const removeTodo = async (id) => {
-    await deleteTodo(id);
-    fetchTodos();
+  const removeProducto = async (id) => {
+    await deleteProducto(id);
+    fetchProductos();
   };
 
   const toggleComepleted = async (id) => {
-    await completeTodo(id);
-    fetchTodos();
+    await completeProducto(id);
+    fetchProductos();
   };
 
-  const ereaseTodo = async (id) => {
-    await hardDeleteTodo(id);
-    fetchTodos();
+  const ereaseProducto = async (id) => {
+    await hardDeleteProducto(id);
+    fetchProductos();
   };
 
-  const handleCreateOrUpdateTodo = async (todo) => {
-    if (!todo._id) {
-      await createTodo(todo);
-      setNewTodo({ title: "", description: "" });
-      fetchTodos();
+  const handleCreateOrUpdateProducto = async (producto) => {
+    if (!producto._id) {
+      await createProducto(producto);
+      setNewProducto({ title: "", description: "" });
+      fetchProductos();
       return;
     }
-    const { _id } = todo;
-    delete todo._id;
-    await updateTodo(_id, todo);
-    fetchTodos();
+    const { _id } = producto;
+    delete producto._id;
+    await updateProducto(_id, producto);
+    fetchProductos();
   };
 
   return (
     <div>
-      <div className="todo-list">
-        <h1>TODOS</h1>
-        {todos &&
-          todos.map((todo) => (
-            <TodoComponent
-              {...todo}
-              handleCreateOrUpdateTodo={handleCreateOrUpdateTodo}
-              hardDeleteTodo={ereaseTodo}
-              removeTodo={removeTodo}
-              toggleTodo={toggleComepleted}
+      <div className="Producto-list">
+        <h1>PRODUCTOS</h1>
+        {productos &&
+          productos.map((producto) => (
+            <ProductoComponent
+              {...producto}
+              handleCreateOrUpdateProducto={handleCreateOrUpdateProducto}
+              hardDeleteProducto={ereaseProducto}
+              removeProducto={removeProducto}
+              toggleProducto={toggleComepleted}
             />
           ))}
         <div>
@@ -155,18 +155,18 @@ function App() {
           <input
             type="text"
             name="title"
-            value={newTodo.title}
+            value={newProducto.title}
             onChange={(e) =>
-              setNewTodo((current) => ({ ...current, title: e.target.value }))
+              setNewProducto((current) => ({ ...current, title: e.target.value }))
             }
           />
           Description
           <input
             type="text"
             name="description"
-            value={newTodo.description}
+            value={newProducto.description}
             onChange={(e) =>
-              setNewTodo((current) => ({
+              setNewProducto((current) => ({
                 ...current,
                 description: e.target.value,
               }))
@@ -174,9 +174,9 @@ function App() {
           />
           <button
             className="button-primary"
-            onClick={() => handleCreateOrUpdateTodo(newTodo)}
+            onClick={() => handleCreateOrUpdateProducto(newProducto)}
           >
-            Create TODO
+            Create Producto
           </button>
         </div>
       </div>
