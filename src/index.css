@@ -6,7 +6,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-image: linear-gradient(to bottom right, #242424, gray, #242424);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -62,7 +62,7 @@ h1 {
   transition: background-color 0.2s ease-in-out;
 }
 
-.button-primary {
+.btn-create {
   margin: 5px 5px 0 0;
   background-color: #242424;
   color: #fff;
@@ -93,7 +93,23 @@ h1 {
   height: 100%;
 }
 .producto-item {
-  width: 100%;
-  height: 100%;
-  align-items: flex-start;
+  /* width: 35%; */
+  /* height: 35%; */
+  display: flex;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.producto-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 18px;
+  padding: 0px 10px 20px 10px;
+  padding: 5px;
+}
+
+.productos-create {
+  padding: 10px;
+  border: ridge;
 }

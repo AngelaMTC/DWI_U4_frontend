@@ -43,6 +43,8 @@ function App() {
 
     return (
       <div className="producto-item">
+        <center>
+          <div className="producto-grid">
         <h2>
           {title} <TiEdit onClick={handleEdit} />
         </h2>
@@ -67,7 +69,7 @@ function App() {
 
         {isEditing && (
           <div>
-            Titile
+            Title
             <input
               type="text"
               name="title"
@@ -99,7 +101,8 @@ function App() {
             </button>
           </div>
         )}
-        <hr />
+        </div>
+        </center>
       </div>
     );
   };
@@ -139,7 +142,9 @@ function App() {
   return (
     <div>
       <div className="Producto-list">
+        <center>
         <h1>PRODUCTOS</h1>
+        </center>
         {productos &&
           productos.map((producto) => (
             <ProductoComponent
@@ -150,8 +155,10 @@ function App() {
               toggleProducto={toggleComepleted}
             />
           ))}
-        <div>
-          Title
+        <div  className="productos-create">
+          <center>
+          <div>
+          <h3>Title </h3>  
           <input
             type="text"
             name="title"
@@ -160,7 +167,10 @@ function App() {
               setNewProducto((current) => ({ ...current, title: e.target.value }))
             }
           />
-          Description
+          </div>
+
+          <div>
+          <h3>Description</h3> 
           <input
             type="text"
             name="description"
@@ -172,12 +182,14 @@ function App() {
               }))
             }
           />
+          </div>
           <button
-            className="button-primary"
+            className="btn-create"
             onClick={() => handleCreateOrUpdateProducto(newProducto)}
           >
             Create Producto
           </button>
+          </center>
         </div>
       </div>
     </div>
